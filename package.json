@@ -1,0 +1,14 @@
+{
+  "name": "agenda-contactos",
+  "version": "0.0.0",
+  "description": "agenda de contactos en HTML 5 con localStorage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andres Bedoya",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  }
+}
