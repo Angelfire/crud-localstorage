@@ -3,3 +3,6 @@
 #sublime-text
 /*.sublime-project
 *.sublime-workspace
+
+#node
+/node_modules
