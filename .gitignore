@@ -12,9 +12,5 @@ Thumbs.db
 /*.sublime-project
 *.sublime-workspace
 
-#node
-<<<<<<< HEAD
-/node_modules
-=======
+# Node
 node_modules/
->>>>>>> 20b7028a49da0990a4e031f01dd5c6d3a8316ff7
