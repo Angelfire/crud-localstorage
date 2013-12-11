@@ -1,4 +1,3 @@
-define(["jquery"], function($) {
 	$(function(){
 		// Variables globales
 		var operation = "A";
@@ -85,4 +84,3 @@ define(["jquery"], function($) {
 		});
 
 	});
-});
