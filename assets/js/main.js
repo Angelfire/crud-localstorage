@@ -19,5 +19,3 @@ require.config({
   }
 
 });
-
-requirejs(['agenda']);
