@@ -36,7 +36,19 @@
 	        				<th>Correo electrónico</th>
 	        			</tr>
 	        		</thead>
-	        		<tbody></tbody>
+	        		<tbody>
+	        			<script type="text/template" id="lista-contactos">
+	        			<tr>
+		        			<td>
+		        				<img src='assets/img/edit.png' alt='Edit<%= id %>' class='btnEdit'>
+		        				<img src='assets/img/delete.png' alt='Delete<%= id %>' class='btnDelete'>
+		        			</td>
+		            	<td><%= nombre %></td>
+		            	<td><%= telefono %></td>
+		            	<td><%= email %></td>
+		            </tr>
+	        			</script>       			
+	        		</tbody>
 				</table>
 			</div>
 		</div>		

@@ -1,8 +1,11 @@
-define(['jquery'], function($) {
+define(['jquery', 'underscore'], function($, _) {
 	$(function(){
 		// Variables globales
 		var operation = "A";
 		var selected_index = -1;
+		var tempCont = _.template($('#lista-contactos').html());
+		console.log($('#lista-contactos').html());
+		console.log(tempCont);
 	    var contactos = localStorage.getItem("contactos");
 	    contactos = JSON.parse(contactos); //Converts string to object
 	    if(contactos == null)
@@ -46,12 +49,8 @@ define(['jquery'], function($) {
 			$("#contactos-agenda tbody").find("tr").remove();
 		    for(var i in contactos){
 		        var con = JSON.parse(contactos[i]);
-		        $("#contactos-agenda tbody").append("<tr>"+
-		        	"  <td><img src='assets/img/edit.png' alt='Edit"+i+"' class='btnEdit'><img src='assets/img/delete.png' alt='Delete"+i+"' class='btnDelete'></td>" + 
-		            "  <td>"+con.nombre+"</td>" +
-		            "  <td>"+con.telefono+"</td>" +
-		            "  <td>"+con.email+"</td>" +
-		            "</tr>");
+		        con.id = i;
+		        $("#contactos-agenda tbody").append(tempCont(con));
 		    }
 		}
 
