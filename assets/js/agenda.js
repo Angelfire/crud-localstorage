@@ -4,8 +4,6 @@ define(['jquery', 'underscore'], function($, _) {
 		var operation = "A";
 		var selected_index = -1;
 		var tempCont = _.template($('#lista-contactos').html());
-		console.log($('#lista-contactos').html());
-		console.log(tempCont);
 	    var contactos = localStorage.getItem("contactos");
 	    contactos = JSON.parse(contactos); //Converts string to object
 	    if(contactos == null)
