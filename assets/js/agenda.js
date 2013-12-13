@@ -4,8 +4,6 @@ define(['jquery', 'underscore'], function($, _) {
 		var operation = "A";
 		var selected_index = -1;
 		var tempCont = _.template($('#lista-contactos').html());
-		console.log($('#lista-contactos').html());
-		console.log(tempCont);
 	    var contactos = localStorage.getItem("contactos");
 	    contactos = JSON.parse(contactos); //Converts string to object
 	    if(contactos == null)
@@ -24,18 +22,18 @@ define(['jquery', 'underscore'], function($, _) {
 			return true;
 		}
 
-	    // Editar contacot
-	    function Edit(){
-	        contactos[selected_index] = JSON.stringify({
-	            nombre: $("#nombre").val(),
-	            telefono: $("#telefono").val(),
-	            email: $("#email").val()
-	        });
-	        localStorage.setItem("contactos", JSON.stringify(contactos));
-	        alert("Dato editado");
-	        operation = "A";
-	        return true;
-	    }	
+    // Editar contacot
+    function Edit(){
+      contactos[selected_index] = JSON.stringify({
+          nombre: $("#nombre").val(),
+          telefono: $("#telefono").val(),
+          email: $("#email").val()
+      });
+      localStorage.setItem("contactos", JSON.stringify(contactos));
+      alert("Dato editado");
+      operation = "A";
+      return true;
+    }	
 
 		// Borrar contacto
 		function Delete(){
