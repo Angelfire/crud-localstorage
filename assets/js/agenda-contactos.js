@@ -1,8 +1,13 @@
 define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
+  // variables
+  var AgendaModel = AgendaModel || {},
+      AgendaCollection = AgendaCollection || {},
+      AgendaView = AgendaView || {};
+
   // Modelo
   AgendaModel = Backbone.Model.extend({
     initialize: function(){
-      console.log('this model has been initializing');
+      console.log('Agenda Model has been initialized');
     },
     defaults: {
       nombre: '',
@@ -13,6 +18,15 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
   });
 
   var agendamodel = new AgendaModel();
+
+  AgendaCollection = Backbone.Collecetion.extend({
+    initialize: function(){
+      console.log("Agenda Collection has been initialized");
+    },
+    model: AgendaModel
+  });
+
+  var agendacollection = new AgendaCollection(agendamodel);
 
   AgendaView = Backbone.View.extend({
     el: $('#container'),
