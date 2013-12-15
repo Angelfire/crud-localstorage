@@ -20,4 +20,4 @@ require.config({
 
 });
 
-requirejs(["agenda"]);
+requirejs(["agenda-contactos"]);
