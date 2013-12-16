@@ -22,18 +22,18 @@ define(['jquery', 'underscore'], function($, _) {
 			return true;
 		}
 
-    // Editar contacot
-    function Edit(){
-      contactos[selected_index] = JSON.stringify({
-          nombre: $("#nombre").val(),
-          telefono: $("#telefono").val(),
-          email: $("#email").val()
-      });
-      localStorage.setItem("contactos", JSON.stringify(contactos));
-      alert("Dato editado");
-      operation = "A";
-      return true;
-    }	
+	    // Editar contacot
+	    function Edit(){
+	      contactos[selected_index] = JSON.stringify({
+	          nombre: $("#nombre").val(),
+	          telefono: $("#telefono").val(),
+	          email: $("#email").val()
+	      });
+	      localStorage.setItem("contactos", JSON.stringify(contactos));
+	      alert("Dato editado");
+	      operation = "A";
+	      return true;
+	    }	
 
 		// Borrar contacto
 		function Delete(){
