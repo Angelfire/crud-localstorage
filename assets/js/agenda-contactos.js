@@ -9,16 +9,23 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
     initialize: function(){
       console.log('Agenda Model has been initialized');
     },
-    defaults: function(){
-      return{
-        nombre: '',
-        telefono: '',
-        email: ''
-      };
+
+    defaults: {
+      nombre: '',
+      telefono: '',
+      email: ''
+    },
+
+    validate: function(attributes){
+      console.log(attributes);
+      if (!_.isString(attributes.nombre) || !attributes.name){
+        return "Solo se permiten letras";
+      }
+      if (!_.isNumber(attributes.telefono)){
+        return "Solo se permiten números";
+      }
     }
   });
-
-  var agendamodel = new AgendaModel();
 
   // Collection
   AgendaCollection = Backbone.Collection.extend({
@@ -28,15 +35,9 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
     model: AgendaModel
   });
 
-  var agendacollection = new AgendaCollection();
-
   // View
   AgendaView = Backbone.View.extend({
     el: $('#container'),
-
-    initialize: function(){
-      _.bindAll(this);
-    },
 
     tempCont: _.template($('#lista-contactos').html()),
 
@@ -45,6 +46,16 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
       'click .btnEdit': 'edit',
       'click .btnDelete': 'delete'
     },
+
+    render: function(){
+
+    },
+
+/*    initialize: function() {
+      _.bindAll(this);
+
+      this.model = new AgendaCollection();
+    },*/
 
     add: function(){
       var newContact = new AgendaModel({
