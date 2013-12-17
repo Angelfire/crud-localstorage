@@ -9,12 +9,11 @@ AgendaModel = Backbone.Model.extend({
     console.log('Agenda Model has been initialized');
   },
 
-  defaults: function(){
-    return{
+  defaults: {
+      id: 1,
       nombre: 'Andres',
       telefono: '1234567',
       email: 'andres.bedoya@globant.com'
-    };
   },
 
   validate: function(attributes){
@@ -37,16 +36,18 @@ AgendaCollection = Backbone.Collection.extend({
 
 // View
 AgendaView = Backbone.View.extend({
-  el: '#container',
+  el: '#contactos-agenda',
 
-  tempCont: _.template($('#lista-contactos').html()),
+  template: _.template($('#lista-contactos').html()),
 
   initialize: function(){
     this.render();
   },
 
   render: function(){
-    this.$el.html(this.tempCont(this.model.toJSON()));
+    var tbody = this.$el.find("tbody");
+    tbody.empty();
+    tbody.append(this.template(this.model.toJSON()));
   },  
 
   events: {
