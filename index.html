@@ -20,9 +20,9 @@
 			<div class="col-xs-6 col-md-4">
 				<form class="form-signin">
 					<h2 class="form-signin-header">Contactos</h2>
-					<input id="nombre" type="text" autofocus="" required="" placeholder="Nombre" class="form-control">
-					<input id="telefono" type="text" autofocus="" required="" placeholder="Teléfono" class="form-control">
-					<input id="email" type="text" autofocus="" required="" placeholder="Correo electrónico" class="form-control">
+					<input id="nombre" type="text" autofocus="" placeholder="Nombre" class="form-control">
+					<input id="telefono" type="text" autofocus="" placeholder="Teléfono" class="form-control">
+					<input id="email" type="text" autofocus="" placeholder="Correo electrónico" class="form-control">
 					<button type="submit" class="btn btn-lg btn-primary btn-block">Agregar</button>
 				</form>
 			</div>
@@ -36,14 +36,27 @@
 	        				<th>Correo electrónico</th>
 	        			</tr>
 	        		</thead>
-	        		<tbody></tbody>
+	        		<tbody>
+	        			<script type="text/template" id="lista-contactos">
+	        			<tr>
+		        			<td>
+		        				<img src='assets/img/edit.png' alt='Edit<%= id %>' class='btnEdit'>
+		        				<img src='assets/img/delete.png' alt='Delete<%= id %>' class='btnDelete'>
+		        			</td>
+			            <td><%= nombre %></td>
+			            <td><%= telefono %></td>
+			            <td><%= email %></td>
+			          </tr>
+	        			</script>       			
+	        		</tbody>
 				</table>
 			</div>
 		</div>		
 	</div>
 
-	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/agenda.js"></script>
+	<script src="assets/js/vendor/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/vendor/underscore-min.js"></script>
+	<script src="assets/js/vendor/backbone-min.js"></script>
+	<script src="assets/js/agenda-contactos.js"></script>
 </body>
 </html>
