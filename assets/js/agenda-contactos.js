@@ -1,17 +1,12 @@
 (function(){ 
   // variables
-  var AgendaModel = AgendaModel || {},
-      AgendaCollection = AgendaCollection || {},
-      AgendaView = AgendaView || {};
+  var Contacto =  Contacto || {},
+      ContactoCollection = ContactoCollection || {},
+      ContactoView = ContactoView || {};
 
   // Model
-  AgendaModel = Backbone.Model.extend({
-    initialize: function(){
-      console.log('Agenda Model has been initialized');
-    },
-
+  Contacto = Backbone.Model.extend({
     defaults: {
-        id: 1,
         nombre: 'Andres',
         telefono: '1234567',
         email: 'andres.bedoya@globant.com'
@@ -28,15 +23,13 @@
   });
 
   // Collection
-  AgendaCollection = Backbone.Collection.extend({
-    initialize: function(){
-      console.log("Agenda Collection has been initialized");
-    },
-    model: AgendaModel
+  ContactoCollection = Backbone.Collection.extend({
+    model: Contacto,
+    localStorage: new Backbone.LocalStorage("Contactos")
   });
 
   // View
-  AgendaView = Backbone.View.extend({
+  ContactoView = Backbone.View.extend({
     el: '#contactos-agenda',
 
     template: _.template($('#lista-contactos').html()),
@@ -46,9 +39,15 @@
     },
 
     render: function(){
-      var tbody = this.$el.find("tbody");
-      tbody.empty();
-      tbody.append(this.template(this.model.toJSON()));
+      // this render a model
+      // var tbody = this.$el.find("tbody");
+      // tbody.empty();
+      // tbody.append(this.template(this.model.toJSON()));
+      this.collection.each(function(contacto){
+        var contactoView = new ContactoView({ model: contacto });
+        console.log(contactoView);
+      });
+      return this;
     },  
 
     events: {
@@ -58,7 +57,7 @@
     },
 
     add: function(){
-      var newContact = new AgendaModel({
+      var newContact = new Contacto({
         nombre: $('nombre').val(),
         telefono: $('telefono').val(),
         email: $('email').val()
@@ -71,11 +70,25 @@
     },
 
     delete: function(){
-
+      this.model.destroy();
+      this.remove();
     }
 
   });
 
-  var agendamodel = new AgendaModel();
-  var agendaview = new AgendaView({ model: agendamodel });
+  var contactoCollection = new ContactoCollection([
+    {
+      nombre: 'Sergio',
+      telefono: '1234567',
+      email: 'andres.bedoya@globant.com'
+    },
+    {
+      nombre: 'Laura',
+      telefono: '1234567',
+      email: 'andres.bedoya@globant.com'
+    }
+  ]);
+  
+  var contactosView = new ContactoView({ collection: contactoCollection });
+
 })();
