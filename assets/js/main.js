@@ -7,7 +7,26 @@
 
   // Contact Model
   // ----------
-  App.Models.Contacto = Backbone.Model.extend({});
+  App.Models.Contacto = Backbone.Model.extend({
+  	// Default attributes for the todo item.
+  	defaults: function(){
+  		return {
+	      nombre: 'Andrés',
+        telefono: '1234567',
+        email: 'andres.bedoya@globant.com'
+	    };
+    },
+
+    // Validation for a model
+  	validate: function(attributes){
+      if (!_.isString(attributes.nombre) || !attributes.name){
+        return "Solo se permiten letras";
+      }
+      if (!_.isNumber(attributes.telefono)){
+        return "Solo se permiten números";
+      }
+    }
+  });
 
   // Contact Collection
   // ---------------
@@ -74,7 +93,7 @@
 		},
 
 		render: function() {
-			this.$el.html(this.template(this.model.toJSON()));
+			this.$el.append(this.template(this.model.toJSON()));
 			return this;
 		}
 
@@ -98,7 +117,11 @@
 				email: $('#email').val()
 			});
 
+			// Adding model to collection
 			this.collection.add(contacto);
+
+			// Saving model into localStorage
+			contacto.save();
 		}
 	});
 
