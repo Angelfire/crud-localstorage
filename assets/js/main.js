@@ -124,6 +124,6 @@
   var addContactoView = new App.Views.AddContacto({ collection: contactosCollection });
   var contactosView = new App.Views.Contactos({ collection: contactosCollection });
 
-  $('#contactos-agenda').find('tbody').html(contactosView.render().el);
+  $('#contactos-agenda').append(contactosView.render().el);
 
 })();
