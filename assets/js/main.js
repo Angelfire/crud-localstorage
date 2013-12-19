@@ -1,5 +1,5 @@
 (function(){
-	window.App = {
+		window.App = {
     Models: {},
     Views: {},
     Collections: {}
@@ -16,7 +16,7 @@
   	model: App.Models.Contacto,
 
   	// Save all of the todo items under the `"agenda-contacto"` namespace
-    localStorage: new Backbone.LocalStorage("agenda-contacto"),
+    localStorage: new Backbone.LocalStorage("agenda-contacto")
 
   });
 
@@ -50,7 +50,7 @@
 
     initialize: function(){
       this.model.on('change', this.render, this);
-      this.model.on('delete', this.remove, this);
+      this.model.on('destroy', this.remove, this);
     },
 
     events: {
