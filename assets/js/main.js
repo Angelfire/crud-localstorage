@@ -39,24 +39,27 @@
 
   });
 
+  //var contactosCollection = new App.Collections.Contactos;
+
   // Contact View - For all Contact
   // -------------------------
   App.Views.Contactos = Backbone.View.extend({
   	tagName: "tbody",
 
-  		initialize: function() {
-				this.collection.on('add', this.addOne, this);
-			},
+		initialize: function() {
+			//this.listenTo(contactosCollection, 'add', this.addOne);
+			this.collection.on('add', this.addOne, this);
+		},
 
-			render: function() {
-				this.collection.each(this.addOne, this);
-				return this;
-			},
+		render: function() {
+			this.collection.each(this.addOne, this);
+			return this;
+		},
 
-			addOne: function(contacto) {
-				var contactoView = new App.Views.Contacto({ model: contacto });
-				this.$el.append(contactoView.render().el);
-			}
+		addOne: function(contacto) {
+			var contactoView = new App.Views.Contacto({ model: contacto });
+			this.$el.append(contactoView.render().el);
+		}
   });
 
   // Contact View - For one Contact
@@ -70,6 +73,8 @@
     initialize: function(){
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.remove, this);
+      // this.listenTo(this.model, 'change', this.render);
+      // this.listenTo(this.model, 'destroy', this.remove);
     },
 
     events: {
@@ -148,5 +153,7 @@
   var contactosView = new App.Views.Contactos({ collection: contactosCollection });
 
   $('#contactos-agenda').append(contactosView.render().el);
+
+ //var contactosView = new App.Views.Contactos();
 
 })();
