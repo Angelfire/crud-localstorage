@@ -92,10 +92,10 @@
 		submit: function(e) {
 			e.preventDefault();
 
-			var contacto = new App.Models.Contacto({ 
-				nombre: $('nombre').val(),
-				telefono: $('telefono').val(),
-				email: $('email').val()
+			var contacto = new App.Models.Contacto({
+				nombre: $('#nombre').val(),
+				telefono: $('#telefono').val(),
+				email: $('#email').val()
 			});
 
 			this.collection.add(contacto);
