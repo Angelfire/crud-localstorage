@@ -1,4 +1,4 @@
-$(function(){
+(function(){
 	// Variables globales
 	var operation = "A";
 	var selected_index = -1;
