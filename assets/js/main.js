@@ -9,22 +9,12 @@
   // ----------
   App.Models.Contacto = Backbone.Model.extend({
   	// Default attributes for the todo item.
-  	defaults: function(){
+    defaults: function(){
   		return {
 	      nombre: 'Andrés',
         telefono: '1234567',
         email: 'andres.bedoya@globant.com'
 	    };
-    },
-
-    // Validation for a model
-  	validate: function(attributes){
-      if (!_.isString(attributes.nombre) || !attributes.name){
-        return "Solo se permiten letras";
-      }
-      if (!_.isNumber(attributes.telefono)){
-        return "Solo se permiten números";
-      }
     }
   });
 
@@ -39,16 +29,19 @@
 
   });
 
-  //var contactosCollection = new App.Collections.Contactos;
+  // Create a global collection of Contactos
+  var contactosCollection = new App.Collections.Contactos;
 
   // Contact View - For all Contact
   // -------------------------
   App.Views.Contactos = Backbone.View.extend({
-  	tagName: "tbody",
+  	el: ".tbody",
 
 		initialize: function() {
-			//this.listenTo(contactosCollection, 'add', this.addOne);
-			this.collection.on('add', this.addOne, this);
+			this.listenTo(contactosCollection, 'add', this.addOne);
+      this.listenTo(contactosCollection, 'reset', this.addAll);
+     
+      contactosCollection.fetch();
 		},
 
 		render: function() {
@@ -59,7 +52,13 @@
 		addOne: function(contacto) {
 			var contactoView = new App.Views.Contacto({ model: contacto });
 			this.$el.append(contactoView.render().el);
-		}
+		},
+
+    addAll: function() {
+      //this.$el.find('td').html('');
+      contactosCollection.each(this.addOne, this);
+    }
+
   });
 
   // Contact View - For one Contact
@@ -71,26 +70,26 @@
     template: _.template($('#lista-contactos').html()),
 
     initialize: function(){
-      this.model.on('change', this.render, this);
-      this.model.on('destroy', this.remove, this);
-      // this.listenTo(this.model, 'change', this.render);
-      // this.listenTo(this.model, 'destroy', this.remove);
+      // this.model.on('change', this.render, this);
+      // this.model.on('destroy', this.remove, this);
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'destroy', this.remove);
     },
 
     events: {
       'click .btnEdit': 'editContact',
-      'click .btnDelete': 'deleteContact'
+      'click .btnDelete': 'deleteContact',
     },
 
     // Edit info for a contact
-    editContact: function(){
-
+    editContact: function(e){
+   
+    this.model.set({"nombre": prompt("Edita el nombre", this.model.get("nombre")), 
+                  "telefono": prompt("Edita el telefono", this.model.get("telefono")),
+                  "email": prompt("Edita el email", this.model.get("email"))});
+    
+    this.model.save();
     },
-
-		// Remove the model
-		remove: function() {
-			this.$el.remove();
-		},
 
 		// Destroy the model
     deleteContact: function(){
@@ -98,7 +97,7 @@
 		},
 
 		render: function() {
-			this.$el.append(this.template(this.model.toJSON()));
+			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		}
 
@@ -110,7 +109,7 @@
 		el: '.form-signin',
 
 		events: {
-			'submit': 'submit'
+			'submit': 'submit',
 		},
 
 		submit: function(e) {
@@ -123,37 +122,18 @@
 			});
 
 			// Adding model to collection
-			this.collection.add(contacto);
+			contactosCollection.add(contacto);
 
 			// Saving model into localStorage
 			contacto.save();
 		}
 	});
 
-  // Data example, a new collection of contacts
-	var contactosCollection = new App.Collections.Contactos([
-    {
-      nombre: 'Andres',
-      telefono: '1234567',
-      email: 'andres.bedoya@globant.com'
-    },
-    {
-      nombre: 'Sergio',
-      telefono: '1234567',
-      email: 'andres.bedoya@globant.com'
-    },
-    {
-      nombre: 'Laura',
-      telefono: '1234567',
-      email: 'andres.bedoya@globant.com'
-    }
-  ]);
 
   var addContactoView = new App.Views.AddContacto({ collection: contactosCollection });
   var contactosView = new App.Views.Contactos({ collection: contactosCollection });
 
-  $('#contactos-agenda').append(contactosView.render().el);
+  $('#contactos-agenda').append(contactosView.el);
 
- //var contactosView = new App.Views.Contactos();
-
+  
 })();
