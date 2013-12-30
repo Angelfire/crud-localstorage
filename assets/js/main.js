@@ -1,5 +1,11 @@
-(function(){
-		window.App = {
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+  'backbone.localStorage'
+  ], function($, _, Backbone) { 
+
+	window.App = {
     Models: {},
     Views: {},
     Collections: {}
@@ -87,7 +93,7 @@
     this.model.set({"nombre": prompt("Edita el nombre", this.model.get("nombre")), 
                   "telefono": prompt("Edita el telefono", this.model.get("telefono")),
                   "email": prompt("Edita el email", this.model.get("email"))});
-    
+
     this.model.save();
     },
 
@@ -129,11 +135,9 @@
 		}
 	});
 
-
   var addContactoView = new App.Views.AddContacto({ collection: contactosCollection });
   var contactosView = new App.Views.Contactos({ collection: contactosCollection });
 
   $('#contactos-agenda').append(contactosView.el);
 
-  
-})();
+});

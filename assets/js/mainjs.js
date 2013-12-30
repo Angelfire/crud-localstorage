@@ -1,10 +1,10 @@
 require.config({
   baseUrl: "/assets/",
   paths: {
-    'jquery': 'vendor/jquery-1.10.2.min',
-    'underscore': 'vendor/underscore-min',
-    'backbone': 'vendor/backbone-min',
-    'backbone.localStorage': 'vendor/backbone.localStorage-min'
+    'jquery': 'js/vendor/jquery-1.10.2.min',
+    'underscore': 'js/vendor/underscore-min',
+    'backbone': 'js/vendor/backbone-min',
+    'backbone.localStorage': 'js/vendor/backbone.localStorage-min'
   },
   shim: {
     'underscore': {
